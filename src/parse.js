@@ -547,8 +547,16 @@ function parse(source, root, options) {
                 next();
             }
         }
+
+        // Allows custom field options in envoy/data-plane-api
+        var coming = peek();
+        if (coming === ".max_items") skip(".max_items");
+        if (coming === ".min_items") skip(".min_items");
+        if (coming === ".items.string.max_bytes") skip(".items.string.max_bytes");
+
         skip("=");
-        parseOptionValue(parent, name);
+        try { parseOptionValue(parent, name); }
+        catch (err) { false; }
     }
 
     function parseOptionValue(parent, name) {
