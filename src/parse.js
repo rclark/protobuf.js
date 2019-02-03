@@ -552,6 +552,7 @@ function parse(source, root, options) {
         var coming = peek();
         if (coming === ".max_items") skip(".max_items");
         if (coming === ".min_items") skip(".min_items");
+        if (coming === ".items.string") skip(".items.string");
         if (coming === ".items.string.max_bytes") skip(".items.string.max_bytes");
 
         skip("=");
